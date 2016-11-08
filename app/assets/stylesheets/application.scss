@@ -17,8 +17,12 @@
  @import "materialize/components/color";
  $primary-color: color("blue", "lighten-1") !default;
  $secondary-color: color("yellow", "darken-1") !default;
- @import "materialize";
+ @import "materialize", "https://fonts.googleapis.com/icon?family=Material+Icons";
 
  h1 {
    color: $primary-color;
+ }
+
+ .button-collapse > i:hover {
+   cursor: pointer;
  }

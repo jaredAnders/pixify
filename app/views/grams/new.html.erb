@@ -1,8 +1,6 @@
-<div class="container">
-  <h1>New Grams</h1>
+<h1>New Grams</h1>
 
-  <%= simple_form_for @gram do |f| %>
-    <%= f.input :caption, class: "materialize-textarea" %>
-    <%= f.button :button, "Post", class: "waves-effect waves-light btn" %>
-  <% end %>
-</div>
+<%= simple_form_for @gram do |f| %>
+  <%= f.input :caption, input_html: {class: "materialize-textarea"} %>
+  <%= f.button :button, "Post", class: "waves-effect waves-light btn" %>
+<% end %>

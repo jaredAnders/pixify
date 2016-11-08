@@ -8,7 +8,20 @@
 </head>
 <body>
 
-<main>
+<nav>
+  <div class="nav-wrapper container">
+    <%= link_to "Pixify", root_path, class: "brand-logo" %>
+    <a data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <%= render partial: "layouts/navlinks" %>
+    </ul>
+    <ul id="mobile-nav" class="side-nav">
+      <%= render partial: "layouts/navlinks" %>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
 <!-- <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p> -->
 <%= yield %>

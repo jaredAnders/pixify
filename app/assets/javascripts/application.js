@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require materialize
 //= require_tree .
+
+$(document).ready(function(){
+  $(".button-collapse").sideNav();
+  $(".materialize-textarea").trigger("autoresize");
+});
