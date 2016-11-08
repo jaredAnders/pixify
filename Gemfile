@@ -42,3 +42,4 @@ group :development, :test do
 end
 gem 'materialize-sass'
 gem 'simple_form'
+gem 'devise', '~> 4.1.1'
