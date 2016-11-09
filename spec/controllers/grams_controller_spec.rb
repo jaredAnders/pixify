@@ -30,7 +30,7 @@ RSpec.describe GramsController, type: :controller do
     end
 
     it "should succesfully create a new gram" do
-      user = user = FactoryGirl.create(:user)
+      user = FactoryGirl.create(:user)
       sign_in user
 
       post :create, gram: {caption: 'TestGram'}
@@ -42,7 +42,7 @@ RSpec.describe GramsController, type: :controller do
     end
 
     it "should properly deal with validation errors" do
-      user = user = FactoryGirl.create(:user)
+      user = FactoryGirl.create(:user)
       sign_in user
 
       post :create, gram: {caption: ''}
@@ -76,6 +76,30 @@ RSpec.describe GramsController, type: :controller do
     it "should return a 404 error if gram is not found" do
       get :edit, id: "foo"
       expect(response).to have_http_status(:not_found)
+    end
+
+  end
+
+  describe "grams#update action" do
+    it "should succesfully update gram in db" do
+      gram = FactoryGirl.create(:gram, caption: 'initial value')
+      patch :update, id: gram.id, gram: { caption: 'updated' }
+      expect(response).to redirect_to root_path
+      gram.reload
+      expect(gram.caption).to eq 'updated'
+    end
+
+    it "should return a 404 error if gram is not found" do
+      patch :update, id: "foo", gram: { caption: 'updated'}
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "should render the edit form if input data is not valid" do
+      gram = FactoryGirl.create(:gram, caption: 'initial value')
+      patch :update, id: gram.id, gram: { caption: '' }
+      expect(response).to have_http_status(:unprocessable_entity)
+      gram.reload
+      expect(gram.caption).to eq 'initial value'
     end
 
   end

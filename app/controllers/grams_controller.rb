@@ -27,6 +27,19 @@ class GramsController < ApplicationController
     render_404 if current_gram.blank?
   end
 
+  def update
+    if current_gram.blank?
+      render_404
+    else
+      current_gram.update_attributes(gram_params)
+      if current_gram.valid?
+        redirect_to root_path
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+  end
+
   private
 
   def gram_params
