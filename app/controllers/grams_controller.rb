@@ -19,10 +19,12 @@ class GramsController < ApplicationController
   end
 
   def show
-    @gram = Gram.find_by_id(params[:id])
-    if @gram.blank?
-      render text: 'Not Found', status: :not_found
-    end
+    render_404 if current_gram.blank?
+  end
+
+  def edit
+    @gram = current_gram
+    render_404 if current_gram.blank?
   end
 
   private
@@ -30,4 +32,14 @@ class GramsController < ApplicationController
   def gram_params
     params.require(:gram).permit(:caption)
   end
+
+  def render_404
+    render text: 'Not found', status: :not_found
+  end
+
+  helper_method :current_gram
+  def current_gram
+    @current_gram ||= Gram.find_by_id(params[:id])
+  end
+
 end
