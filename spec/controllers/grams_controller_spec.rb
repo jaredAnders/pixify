@@ -65,13 +65,30 @@ RSpec.describe GramsController, type: :controller do
   end
 
   describe "grams#edit action" do
+    it "shouldn't allow unauthenticated users to view the edit page" do
+      gram = FactoryGirl.create(:gram)
+      get :edit, id: gram.id
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "shouldn't allow users that didn't create gram to view the edit page" do
+      gram = FactoryGirl.create(:gram)
+      user = FactoryGirl.create(:user)
+      sign_in user
+      get :edit, id: gram.id
+      expect(response).to have_http_status(:forbidden)
+    end
+
     it "should display edit page if gram is found" do
       gram = FactoryGirl.create(:gram)
+      sign_in gram.user
       get :edit, id: gram.id
       expect(response).to have_http_status(:success)
     end
 
     it "should return a 404 error if gram is not found" do
+      user = FactoryGirl.create(:user)
+      sign_in user
       get :edit, id: "foo"
       expect(response).to have_http_status(:not_found)
     end
