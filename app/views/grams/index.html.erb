@@ -1,1 +1,6 @@
 <h1>Big Grams</h1>
+
+<% @grams.each do |gram| %>
+  <%= link_to gram.caption, gram_path(gram) %>
+  <br>
+<% end %>
