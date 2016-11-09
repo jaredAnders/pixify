@@ -40,6 +40,15 @@ class GramsController < ApplicationController
     end
   end
 
+  def destroy
+    if current_gram.blank?
+      render_404
+    else
+      current_gram.destroy
+      redirect_to root_path
+    end
+  end
+
   private
 
   def gram_params

@@ -49,7 +49,6 @@ RSpec.describe GramsController, type: :controller do
       expect(response).to have_http_status(:unprocessable_entity)
       expect(Gram.count).to eq 0
     end
-
   end
 
   describe "grams#show action" do
@@ -63,7 +62,6 @@ RSpec.describe GramsController, type: :controller do
       get :show, id: "foo"
       expect(response).to have_http_status(:not_found)
     end
-
   end
 
   describe "grams#edit action" do
@@ -77,7 +75,6 @@ RSpec.describe GramsController, type: :controller do
       get :edit, id: "foo"
       expect(response).to have_http_status(:not_found)
     end
-
   end
 
   describe "grams#update action" do
@@ -101,7 +98,21 @@ RSpec.describe GramsController, type: :controller do
       gram.reload
       expect(gram.caption).to eq 'initial value'
     end
+  end
 
+  describe "grams#destroy action" do
+    it "should successfully delete gram in db" do
+      gram = FactoryGirl.create(:gram)
+      delete :destroy, id: gram.id
+      expect(response).to redirect_to root_path
+      gram = Gram.find_by_id(gram.id)
+      expect(gram).to eq nil
+    end
+
+    it "should return a 404 error if gram is not found" do
+      delete :destroy, id: 'foo'
+      expect(response).to have_http_status(:not_found)
+    end
   end
 
 end
