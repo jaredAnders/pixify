@@ -136,8 +136,23 @@ RSpec.describe GramsController, type: :controller do
   end
 
   describe "grams#destroy action" do
+    it "shouldn't allow unauthenticated users to delete a gram" do
+      gram = FactoryGirl.create(:gram)
+      delete :destroy, id: gram.id
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "shouldn't allow users to delete other users' grams" do
+      gram = FactoryGirl.create(:gram)
+      user = FactoryGirl.create(:user)
+      sign_in user
+      delete :destroy, id: gram.id
+      expect(response).to have_http_status(:forbidden)
+    end
+
     it "should successfully delete gram in db" do
       gram = FactoryGirl.create(:gram)
+      sign_in gram.user
       delete :destroy, id: gram.id
       expect(response).to redirect_to root_path
       gram = Gram.find_by_id(gram.id)
@@ -145,6 +160,8 @@ RSpec.describe GramsController, type: :controller do
     end
 
     it "should return a 404 error if gram is not found" do
+      user = FactoryGirl.create(:user)
+      sign_in user
       delete :destroy, id: 'foo'
       expect(response).to have_http_status(:not_found)
     end

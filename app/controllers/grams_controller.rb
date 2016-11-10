@@ -1,5 +1,5 @@
 class GramsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @grams = Gram.all
@@ -55,8 +55,12 @@ class GramsController < ApplicationController
     if current_gram.blank?
       render_404
     else
-      current_gram.destroy
-      redirect_to root_path
+      if current_user != current_gram.user
+        render text: 'Forbidden', status: :forbidden
+      else
+        current_gram.destroy
+        redirect_to root_path
+      end
     end
   end
 
