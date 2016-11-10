@@ -3,4 +3,5 @@ class Gram < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   validates :caption, presence: true
+  validates :image, presence: true
 end

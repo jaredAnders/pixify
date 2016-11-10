@@ -17,7 +17,6 @@ RSpec.describe GramsController, type: :controller do
     it "should successfully show the new form" do
       user = FactoryGirl.create(:user)
       sign_in user
-
       get :new
       expect(response).to have_http_status(:success)
     end
@@ -32,8 +31,10 @@ RSpec.describe GramsController, type: :controller do
     it "should succesfully create a new gram" do
       user = FactoryGirl.create(:user)
       sign_in user
-
-      post :create, gram: {caption: 'TestGram'}
+      post :create, gram: {
+        caption: 'TestGram',
+        image: fixture_file_upload("/image.png", "image/png")
+      }
       expect(response).to redirect_to root_path
 
       gram = Gram.last
