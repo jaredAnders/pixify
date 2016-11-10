@@ -2,7 +2,7 @@ class GramsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @grams = Gram.all
+    @grams = Gram.order(:created_at).reverse_order
   end
 
   def new
@@ -43,7 +43,7 @@ class GramsController < ApplicationController
   private
 
   def gram_params
-    params.require(:gram).permit(:caption)
+    params.require(:gram).permit(:caption, :image)
   end
 
   def render_status(status)

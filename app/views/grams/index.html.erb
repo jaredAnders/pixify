@@ -1,6 +1,10 @@
-<h1>Big Grams</h1>
+<br>
 
 <% @grams.each do |gram| %>
-  <%= link_to gram.caption, gram_path(gram) %>
-  <br>
+  <p><%= gram.user.email %></p>
+  <%= link_to gram_path(gram) do %>
+    <%= image_tag gram.image, class: 'responsive-img' %>
+  <% end %>
+  <p><%= gram.caption %></p>
+  <div class="divider"></div>
 <% end %>

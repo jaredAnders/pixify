@@ -1,4 +1,14 @@
 <%= simple_form_for @gram do |f| %>
   <%= f.input :caption, input_html: {class: "materialize-textarea"} %>
-  <%= f.button :button, "Post", class: "waves-effect waves-light btn" %>
+  <div class="file-field input-field">
+    <a class="btn waves-effect waves-light">
+      <i class="material-icons left">file_upload</i>
+      Image
+      <%= f.input :image, label: false %>
+    </a>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+  </div>
+  <%= f.button :button, "Post", class: "waves-effect waves-light btn right" %>
 <% end %>
