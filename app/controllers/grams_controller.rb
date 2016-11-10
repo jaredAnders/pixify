@@ -11,57 +11,33 @@ class GramsController < ApplicationController
 
   def create
     @gram = current_user.grams.create(gram_params)
-    if @gram.valid?
-      redirect_to root_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+    return redirect_to root_path if @gram.valid?
+    render :new, status: :unprocessable_entity
   end
 
   def show
-    render_404 if current_gram.blank?
+    render_status(:not_found) if current_gram.blank?
   end
 
   def edit
-    if current_gram.blank?
-      render_404
-    else
-      if current_user != current_gram.user
-        render text: 'Forbidden', status: :forbidden
-      else
-        @gram = current_gram
-      end
-    end
+    return render_status(:not_found) if current_gram.blank?
+    return render_status(:forbidden) if current_user != current_gram.user
+    @gram = current_gram
   end
 
   def update
-    if current_gram.blank?
-      render_404
-    else
-      if current_user != current_gram.user
-        render text: "Forbidden", status: :forbidden
-      else
-        current_gram.update_attributes(gram_params)
-        if current_gram.valid?
-          redirect_to root_path
-        else
-          render :edit, status: :unprocessable_entity
-        end
-      end
-    end
+    return render_status(:not_found) if current_gram.blank?
+    return render_status(:forbidden) if current_user != current_gram.user
+    current_gram.update_attributes(gram_params)
+    return redirect_to root_path if current_gram.valid?
+    render :edit, status: :unprocessable_entity
   end
 
   def destroy
-    if current_gram.blank?
-      render_404
-    else
-      if current_user != current_gram.user
-        render text: 'Forbidden', status: :forbidden
-      else
-        current_gram.destroy
-        redirect_to root_path
-      end
-    end
+    return render_status(:not_found) if current_gram.blank?
+    return render_status(:forbidden) if current_user != current_gram.user
+    current_gram.destroy
+    redirect_to root_path
   end
 
   private
@@ -70,8 +46,8 @@ class GramsController < ApplicationController
     params.require(:gram).permit(:caption)
   end
 
-  def render_404
-    render text: 'Not found', status: :not_found
+  def render_status(status)
+    render text: "#{status.to_s.titleize}", status: status
   end
 
   helper_method :current_gram
