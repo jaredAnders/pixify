@@ -71,7 +71,7 @@ RSpec.describe GramsController, type: :controller do
       expect(response).to redirect_to new_user_session_path
     end
 
-    it "shouldn't allow users that didn't create gram to view the edit page" do
+    it "shouldn't allow users to edit other users' grams" do
       gram = FactoryGirl.create(:gram)
       user = FactoryGirl.create(:user)
       sign_in user
@@ -95,8 +95,23 @@ RSpec.describe GramsController, type: :controller do
   end
 
   describe "grams#update action" do
+    it "shouldn't allow unauthenticated users to update grams" do
+      gram = FactoryGirl.create(:gram)
+      patch :update, id: gram.id, gram: {caption:'new value'}
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "shouldn't allow users to update other users' grams" do
+      gram = FactoryGirl.create(:gram)
+      user = FactoryGirl.create(:user)
+      sign_in user
+      patch :update, id: gram.id, gram: {caption:'new value'}
+      expect(response).to have_http_status(:forbidden)
+    end
+
     it "should succesfully update gram in db" do
-      gram = FactoryGirl.create(:gram, caption: 'initial value')
+      gram = FactoryGirl.create(:gram, caption: 'new value')
+      sign_in gram.user
       patch :update, id: gram.id, gram: { caption: 'updated' }
       expect(response).to redirect_to root_path
       gram.reload
@@ -104,12 +119,15 @@ RSpec.describe GramsController, type: :controller do
     end
 
     it "should return a 404 error if gram is not found" do
-      patch :update, id: "foo", gram: { caption: 'updated'}
+      user = FactoryGirl.create(:user)
+      sign_in user
+      patch :update, id: "foo", gram: { caption: 'new value'}
       expect(response).to have_http_status(:not_found)
     end
 
     it "should render the edit form if input data is not valid" do
       gram = FactoryGirl.create(:gram, caption: 'initial value')
+      sign_in gram.user
       patch :update, id: gram.id, gram: { caption: '' }
       expect(response).to have_http_status(:unprocessable_entity)
       gram.reload
