@@ -1,10 +1,12 @@
 <br>
 <% @grams.each do |gram| %>
-  <div class="valign-wrapper user-header">
-    <i class="material-icons">account_circle</i>
-    <span class="username">
-      <%= gram.user.email %>
-    </span>
+  <div class="row user-header">
+    <div class="valign-wrapper col s12">
+      <i class="material-icons">account_circle</i>
+      <span class="username">
+        <b><%= gram.user.email %></b>
+      </span>
+    </div>
   </div>
   <%= link_to gram_path(gram) do %>
     <%= image_tag gram.image, class: 'responsive-img' %>
@@ -27,5 +29,5 @@
       </div>
     <% end %>
   </div>
-
+  <br>
 <% end %>

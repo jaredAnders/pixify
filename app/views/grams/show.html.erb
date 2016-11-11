@@ -1,8 +1,9 @@
+<br>
 <div class="row user-header">
   <div class="col s10 m11 valign-wrapper">
     <i class="material-icons">account_circle</i>
     <span class="username">
-      <%= current_gram.user.email %>
+      <b><%= current_gram.user.email %></b>
     </span>
   </div>
 
@@ -16,9 +17,7 @@
 
 </div>
 
-<div>
-  <%= image_tag current_gram.image, class: 'responsive-img' %>
-</div>
+<%= image_tag current_gram.image, class: 'responsive-img' %>
 
 <div class="row comment valign-wrapper">
   <div class="col s1">
