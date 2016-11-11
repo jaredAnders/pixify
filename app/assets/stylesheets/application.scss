@@ -15,8 +15,8 @@
  */
 
  @import "materialize/components/color";
- $primary-color: color("blue", "lighten-1") !default;
- $secondary-color: color("yellow", "darken-1") !default;
+ $primary-color: color("indigo", "darken-4") !default;
+ $secondary-color: color("deep-orange", "accent-2") !default;
  @import "materialize", "https://fonts.googleapis.com/icon?family=Material+Icons";
 
  h1 {
@@ -25,4 +25,11 @@
 
  .button-collapse > i:hover {
    cursor: pointer;
+ }
+
+ .user-header {
+   padding: 1em 0;
+   .username {
+     padding-left: .5em;
+   }
  }
