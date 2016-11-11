@@ -19,9 +19,12 @@
  $secondary-color: color("deep-orange", "accent-2") !default;
  @import "materialize", "https://fonts.googleapis.com/icon?family=Material+Icons";
 
-//nav menu button
- .button-collapse > i:hover {
+//mobile nav menu button
+ nav .button-collapse {
+   margin: 0;
+   & > i:hover {
    cursor: pointer;
+   }
  }
 
 //index
