@@ -1,5 +1,41 @@
-<h1><%= current_gram.caption %></h1>
+<div class="valign-wrapper user-header">
+  <i class="material-icons">account_circle</i>
+  <span class="username">
+    <%= current_gram.user.email %>
+  </span>
+</div>
 
 <div>
   <%= image_tag current_gram.image, class: 'responsive-img' %>
+</div>
+
+<div class="comments-list">
+  <% current_gram.comments.each do |comment| %>
+    <div class="row comment valign-wrapper">
+      <div class="col s1">
+        <i class="material-icons valign">account_circle</i>
+      </div>
+      <div class="col s11">
+        <b><%= comment.user.email %></b>
+        <br>
+        <%= comment.comment %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="new-comment">
+  <%= simple_form_for @comment, url: gram_comments_path(current_gram) do |f| %>
+    <div class="row valign-wrapper">
+      <div class="col s1">
+
+      </div>
+      <div class="col s8">
+        <%= f.input :comment, label: false, placeholder: 'Add a comment...', input_html: {class: "materialize-textarea"} %>
+      </div>
+      <div class="col s3">
+        <%= f.button :button, "Post", class: "waves-effect waves-light btn btn-flat deep-orange-text text-accent-2 right" %>
+      </div>
+    </div>
+  <% end %>
 </div>

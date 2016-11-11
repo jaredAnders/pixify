@@ -16,7 +16,8 @@ class GramsController < ApplicationController
   end
 
   def show
-    render_status(:not_found) if current_gram.blank?
+    return render_status(:not_found) if current_gram.blank?
+    @comment = Comment.new
   end
 
   def edit
