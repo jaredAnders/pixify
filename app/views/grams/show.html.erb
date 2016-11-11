@@ -1,8 +1,19 @@
-<div class="valign-wrapper user-header">
-  <i class="material-icons">account_circle</i>
-  <span class="username">
-    <%= current_gram.user.email %>
-  </span>
+<div class="row user-header">
+  <div class="col s10 m11 valign-wrapper">
+    <i class="material-icons">account_circle</i>
+    <span class="username">
+      <%= current_gram.user.email %>
+    </span>
+  </div>
+
+  <div class="col s2 m1 valign-wrapper">
+    <% if current_user == current_gram.user %>
+      <%= link_to  edit_gram_path(current_gram) do %>
+        <i class="material-icons right deep-orange-text text-accent-2">edit</i>
+      <% end %>
+    <% end %>
+  </div>
+
 </div>
 
 <div>
