@@ -20,6 +20,17 @@
   <%= image_tag current_gram.image, class: 'responsive-img' %>
 </div>
 
+<div class="row comment valign-wrapper">
+  <div class="col s1">
+    <i class="material-icons valign">account_circle</i>
+  </div>
+  <div class="col s11">
+    <b><%= current_gram.user.email %></b>
+    <br>
+    <%= current_gram.caption %>
+  </div>
+</div>
+
 <div class="comments-list">
   <% current_gram.comments.each do |comment| %>
     <div class="row comment valign-wrapper">
