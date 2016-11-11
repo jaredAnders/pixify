@@ -11,8 +11,21 @@
   <% end %>
 
   <div class="valign-wrapper">
-    <%= gram.caption %>
+    <span><b><%= gram.user.email %></b>&nbsp;<%= gram.caption %></span>
   </div>
 
-  <div class="divider"></div>
+  <div class="comments">
+    <% if gram.comments.count > 2 %>
+      <%= link_to gram_path(gram) do %>
+        <span class="view-all-comments">View all <%= gram.comments.count %> comments</span>
+      <% end %>
+    <% end %>
+    <% gram.comments.order(:created_at).last(2).each do |comment| %>
+      <div>
+        <b><%= comment.user.email %></b>
+        <%= comment.comment %>
+      </div>
+    <% end %>
+  </div>
+
 <% end %>
