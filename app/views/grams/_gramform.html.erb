@@ -9,6 +9,6 @@
       <input class="file-path validate" type="text">
     </div>
   </div>
-  <%= f.input :caption, input_html: {class: "materialize-textarea"} %>
+  <%= f.input :caption, label: false, placeholder: 'Add a caption...', input_html: {class: "materialize-textarea"} %>
   <%= f.button :button, "Share", class: "waves-effect waves-light btn right" %>
 <% end %>

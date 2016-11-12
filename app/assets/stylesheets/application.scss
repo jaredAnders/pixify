@@ -13,28 +13,38 @@
  *= require_tree .
  *= require_self
  */
-
- @import "materialize/components/color";
- $primary-color: color("indigo", "darken-4") !default;
- $secondary-color: color("deep-orange", "accent-2") !default;
- @import "materialize", "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "materialize/components/color";
+$primary-color: color("indigo", "darken-4") !default;
+$secondary-color: color("deep-orange", "accent-2") !default;
+@import "materialize", "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 //mobile nav menu button
- nav .button-collapse {
-   margin: 0;
-   & > i:hover {
-   cursor: pointer;
-   }
- }
+nav .button-collapse {
+    margin: 0;
 
+    & > i:hover {
+        cursor: pointer;
+    }
+}
 //index
- .user-header {
-   margin-bottom: .5em;
-   .username {
-     padding-left: .5em;
-   }
- }
+.user-header {
+    margin-bottom: 0.5em;
 
- .view-all-comments {
-   @extend .grey-text
- }
+    .username {
+        padding-left: 0.5em;
+    }
+}
+
+.view-all-comments {
+    @extend .grey-text
+}
+
+//comment submit form
+textarea.materialize-textarea {
+    min-height: 0;
+    padding-bottom: 0.8rem;
+}
+
+.submit-link {
+  padding: 0px 1rem;
+}
