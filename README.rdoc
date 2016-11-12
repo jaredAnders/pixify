@@ -1,28 +1,17 @@
-== README
+== Pixify
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Pixify was created as part of the {Firehose Project}[https://www.thefirehoseproject.com/] curriculum. The primary focus was learning and experimenting with TDD. Pixify is a simplified Instagram clone built using Rails 4.1.9.
 
-Things you may want to cover:
+== Concepts/Technologies Covered
 
-* Ruby version
+* TDD[https://en.wikipedia.org/wiki/Test-driven_development]
+* RSpec[http://rspec.info/]
+* {Factory Girl}[https://github.com/thoughtbot/factory_girl]
 
-* System dependencies
+== TODO
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Show image preview within gram form
+* Crop images to square dimensions on upload
+* Add like button and display count
+* Add user profiles
+* Add avatar image for users

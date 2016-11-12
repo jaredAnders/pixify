@@ -1,0 +1,12 @@
+Sat, 12 Nov 2016 14:54:48 +0000
+README.rdoc	Sat, 12 Nov 2016 15:04:08 +0000
+app/controllers/application_controller.rb	Fri, 04 Nov 2016 13:51:54 +0000
+app/controllers/comments_controller.rb	Fri, 11 Nov 2016 14:03:16 +0000
+app/controllers/grams_controller.rb	Fri, 11 Nov 2016 15:08:55 +0000
+app/helpers/application_helper.rb	Fri, 04 Nov 2016 13:51:54 +0000
+app/helpers/comments_helper.rb	Fri, 11 Nov 2016 13:25:06 +0000
+app/helpers/grams_helper.rb	Mon, 07 Nov 2016 12:31:54 +0000
+app/models/comment.rb	Fri, 11 Nov 2016 13:48:18 +0000
+app/models/gram.rb	Fri, 11 Nov 2016 13:53:26 +0000
+app/models/user.rb	Fri, 11 Nov 2016 13:53:38 +0000
+app/uploaders/image_uploader.rb	Thu, 10 Nov 2016 18:59:31 +0000
