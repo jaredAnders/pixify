@@ -1,4 +1,4 @@
-<%= simple_form_for @gram do |f| %>
+<%= simple_form_for gram do |f| %>
   <div class="file-field input-field">
     <a class="btn waves-effect waves-light">
       <i class="material-icons left">file_upload</i>
@@ -10,5 +10,5 @@
     </div>
   </div>
   <%= f.input :caption, label: false, placeholder: 'Add a caption...', input_html: {class: "materialize-textarea"} %>
-  <%= f.button :button, "Share", class: "waves-effect waves-light btn right" %>
+  <%= f.button :button, cta, class: "waves-effect waves-light btn right" %>
 <% end %>
